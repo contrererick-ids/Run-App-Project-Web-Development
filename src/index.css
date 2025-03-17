@@ -6,8 +6,9 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #4a4949;
+  background-color: rgb(129, 128, 128);
+  color: rgba(255, 255, 255, 0.928);
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
