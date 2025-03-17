@@ -5,17 +5,19 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
     <>
       <Router>
         <Header />
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/SignIn" element={<Login/>}/>
-          <Route path="/signup" element={<SignUp/>}/>
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/SignIn" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/Profile" element={<Profile />} />
+          </Routes>
         <Footer />
       </Router>
     </>
