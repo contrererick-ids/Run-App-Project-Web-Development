@@ -1,4 +1,5 @@
 import { IoNotificationsSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -7,10 +8,13 @@ const Header = () => {
         <h1 className=" text-neutral-100 text-2xl">Run-App</h1>
         <ul className="flex gap-4 ">
           <li className=" hover:text-neutral-50">
-            <a href="/">Training</a>
+            <Link to="/">Training</Link>
           </li>
           <li className=" hover:text-neutral-50">
-            <a href="/about">What's new</a>
+            <Link to="/SignIn">Log In</Link>
+          </li>
+          <li className=" hover:text-neutral-50">
+            <Link to="/signup">Sign Up</Link>
           </li>
         </ul>
         <div className="flex justify-end items-center ml-auto">
