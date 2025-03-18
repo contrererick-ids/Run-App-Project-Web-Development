@@ -15,7 +15,7 @@ const SignUp = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold text-center mb-6 pt-5 text-neutral-800">Create your RunApp Account</h1>
         
         <form onSubmit={handleSubmit}>

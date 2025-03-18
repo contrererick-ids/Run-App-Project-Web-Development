@@ -23,7 +23,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto my-10 rounded-3xl p-8 bg-grey-1000/30 backdrop-blur-lg border border-white/10 shadow-2xl">
+    <div className="max-w-4xl mx-auto my-10 rounded-3xl p-8 bg-zinc-700/30 backdrop-blur-lg border border-white/10 shadow-2xl">
       {/* Perfil del usuario */}
       <div className="flex flex-col md:flex-row items-center md:items-center gap-6 mb-8">
         <div className="relative justify-center items-center">
