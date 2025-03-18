@@ -1,5 +1,6 @@
 import { IoNotificationsSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import NotificationPanel from "./NotificationPanel";
 
 const Header = () => {
   return (
@@ -19,7 +20,7 @@ const Header = () => {
         </ul>
         <div className="flex justify-end items-center ml-auto">
           <div className=" flex gap-4 items-center mr-2">
-            <IoNotificationsSharp className="text-3xl text-neutral-200 hover:text-neutral-50 cursor-pointer" />
+              <NotificationPanel />
             <div className="w-0.5 rounded-md h-11 bg-neutral-500"></div>
             <div className="w-12.5 h-12.5 rounded-full bg-neutral-400 items-center flex justify-center hover:bg-neutral-500 cursor-pointer">
               <Link to={"/Profile"}>
