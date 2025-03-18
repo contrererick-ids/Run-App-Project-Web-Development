@@ -212,8 +212,8 @@ const AddActivity = () => {
   };
 
   return (
-    <div className="text-gray-100 min-h-screen p-10 justify-center mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Create Training Plan</h1>
+    <div className="text-gray-100 min-h-screen p-10 mt-7 justify-center mx-auto">
+      <h1 className="text-4xl font-bold mb-6">Create Training Plan</h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -262,7 +262,7 @@ const AddActivity = () => {
                     : workout.workout
                     ? "bg-blue-900"
                     : "bg-zinc-800/10"
-                } ${activeDay === index ? "ring-2 ring-sky-500" : ""}`}
+                } ${activeDay === index ? "text-sky-400 font-bold" : ""}`}
                 onClick={() => handleDayClick(index)}
               >
                 <div className="text-xs font-medium">
