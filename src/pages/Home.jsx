@@ -1,10 +1,10 @@
-import RunningCalendar from "../components/RunningCalendar";
 import { Link } from "react-router-dom";
+import TrainingCalendar from "../components/TrainingCalendar";
 
 const Home = () => {
   return (
     <>
-      <div className=" m-10  border-b-4 border-sky-400 pb-4 flex flex-col items-center">
+      <div className=" m-10  border-b-2 border-zinc-400/30 pb-4 flex flex-col items-center">
         <Link to={"/Profile"} className="w-50 h-50 rounded-full bg-neutral-400 items-center flex justify-center">
           <img
             className="w-40 h-40 rounded-full"
@@ -19,7 +19,7 @@ const Home = () => {
           Your personal running calendar
         </p>
       </div>
-      <RunningCalendar />
+      <TrainingCalendar />
     </>
   );
 };

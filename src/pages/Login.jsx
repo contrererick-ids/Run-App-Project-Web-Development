@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaApple } from "react-icons/fa";
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,15 +16,15 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="w-full max-w-md p-10 bg-white rounded-lg shadow-md ">
-        <h1 className="text-2xl font-bold text-center mb-6 text-neutral-800">Log In To RunApp</h1>
+      <div className="w-full max-w-md p-10 bg-zinc-400/20 backdrop-blur-2xl rounded-lg shadow-md border border-gray-100/20">
+        <h1 className="text-3xl font-bold text-center mb-6 text-gray-100">Log In To RunApp</h1>
         
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
               type="email"
               placeholder="Email"
-              className="text-neutral-600 w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="text-white w-full px-4 py-2 bg-zinc-300/20 border border-gray-300/30 rounded focus:outline-none focus:ring-2 focus:ring-sky-400"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -33,7 +35,7 @@ const Login = () => {
             <input
               type="password"
               placeholder="Password"
-              className="text-neutral-600 w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="text-white w-full px-4 py-2 bg-zinc-300/20 border border-gray-300/30 rounded focus:outline-none focus:ring-2 focus:ring-sky-400"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -42,7 +44,7 @@ const Login = () => {
           
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition duration-200 cursor-pointer"
+            className="w-full py-2 px-4 bg-sky-400 text-white font-semibold rounded hover:bg-sky-500 transition duration-200 cursor-pointer"
           >
             Log In
           </button>
@@ -57,50 +59,48 @@ const Login = () => {
               checked={keepLoggedIn}
               onChange={(e) => setKeepLoggedIn(e.target.checked)}
             />
-            <label htmlFor="keepLoggedIn" className="ml-2 block text-sm text-gray-700 disable-select:bg-transparent">
+            <label htmlFor="keepLoggedIn" className="ml-2 block text-sm text-gray-300 disable-select:bg-transparent">
               Keep me logged in
             </label>
           </div>
           
-          <Link to="/forgot-password" className="text-sm text-blue-500 hover:text-blue-700">
+          <Link to="/forgot-password" className="text-sm text-sky-500 hover:text-sky-700">
             Forgot password?
           </Link>
         </div>
         
-        <div className="relative">
+        <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300"></div>
+            <div className="w-full border-t border-gray-300/30 border-1 "></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">or</span>
+            <span className="px-2 bg-white rounded-2xl text-gray-500">or</span>
           </div>
         </div>
         
         <div className="mt-6 space-y-3">
-          <button className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+          <button className="w-full flex items-center justify-center px-4 py-2 border  rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
             <img src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg" alt="Google" className="h-5 w-5 mr-2" />
             <span>Sign in with Google</span>
           </button>
           
-          <button className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
+          <button className="w-full flex items-center justify-center px-4 py-2  rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
               <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
             </svg>
             <span>Log In with Facebook</span>
           </button>
           
-          <button className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-900">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M22.001 12c0-5.523-4.477-10-10-10s-10 4.477-10 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54v-2.891h2.54v-2.203c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.774l-.443 2.891h-2.331v6.988c4.781-.75 8.438-4.887 8.438-9.878z"/>
-            </svg>
+          <button className="w-full flex items-center justify-center px-4 py-2 rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-900">
+            <FaApple className="h-5 w-5 mr-2" />
             <span>Sign in with Apple</span>
           </button>
         </div>
         
         <div className="text-center mt-6">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-300">
             New to RunApp?{' '}
-            <Link to="/signup" className="text-blue-500 hover:text-blue-700 font-medium">
+            <Link to="/signup" className="text-sky-500 hover:text-sky-700 font-medium">
               Register new account »
             </Link>
           </p>

@@ -1,4 +1,3 @@
-import { IoNotificationsSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import NotificationPanel from "./NotificationPanel";
 import ProfileAction from "./ProfileAction";
@@ -12,7 +11,7 @@ const Header = () => {
           <li className=" hover:text-neutral-50">
             <Link to="/">Training</Link>
           </li>
-          <li className=" hover:text-neutral-50">
+          <li className=" hover:text-neutral-50 active:underline-1">
             <Link to="/SignIn">Log In</Link>
           </li>
           <li className=" hover:text-neutral-50">
@@ -22,9 +21,7 @@ const Header = () => {
         <div className="flex justify-end items-center ml-auto">
           <div className=" flex gap-4 items-center mr-2">
               <NotificationPanel />
-
               <ProfileAction />
-
           </div>
         </div>
       </nav>
