@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Info, BarChart3 } from "lucide-react";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, BarChart3 } from "lucide-react";
 
-const TrainingCalendar = ({ trainings = [], workouts = [], user }) => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [calendarDays, setCalendarDays] = useState([]);
-  const [weeklyStats, setWeeklyStats] = useState([]);
+const TrainingCalendar = () => {
+  const [currentMonth, setCurrentMonth] = useState(2); // March (0-indexed)
+  const [currentYear, setCurrentYear] = useState(2025);
 
   // Mapeo de tipos de entrenamiento a colores
   const workoutTypeColors = {
@@ -21,153 +18,116 @@ const TrainingCalendar = ({ trainings = [], workouts = [], user }) => {
 
   // Nombres de los meses
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"
   ];
 
-  // Días de la semana
-  const weekDays = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+  // Hardcoded calendar days for March 2025
+  const calendarDays = [
+    // Week 1 (February/March)
+    [
+      { day: 24, month: 1, year: 2025, isCurrentMonth: false },
+      { day: 25, month: 1, year: 2025, isCurrentMonth: false },
+      { day: 26, month: 1, year: 2025, isCurrentMonth: false },
+      { day: 27, month: 1, year: 2025, isCurrentMonth: false },
+      { day: 28, month: 1, year: 2025, isCurrentMonth: false },
+      { day: 1, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 2, month: 2, year: 2025, isCurrentMonth: true }
+    ],
+    // Week 2
+    [
+      { day: 3, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 4, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 5, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 6, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 7, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 8, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 9, month: 2, year: 2025, isCurrentMonth: true }
+    ],
+    // Week 3
+    [
+      { day: 10, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 11, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 12, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 13, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 14, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 15, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 16, month: 2, year: 2025, isCurrentMonth: true }
+    ],
+    // Week 4
+    [
+      { day: 17, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 18, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 19, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 20, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 21, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 22, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 23, month: 2, year: 2025, isCurrentMonth: true }
+    ],
+    // Week 5
+    [
+      { day: 24, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 25, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 26, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 27, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 28, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 29, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 30, month: 2, year: 2025, isCurrentMonth: true }
+    ],
+    // Week 6 (March/April)
+    [
+      { day: 31, month: 2, year: 2025, isCurrentMonth: true },
+      { day: 1, month: 3, year: 2025, isCurrentMonth: false },
+      { day: 2, month: 3, year: 2025, isCurrentMonth: false },
+      { day: 3, month: 3, year: 2025, isCurrentMonth: false },
+      { day: 4, month: 3, year: 2025, isCurrentMonth: false },
+      { day: 5, month: 3, year: 2025, isCurrentMonth: false },
+      { day: 6, month: 3, year: 2025, isCurrentMonth: false }
+    ]
   ];
 
-  useEffect(() => {
-    generateCalendarDays();
-    calculateWeeklyStats();
-  }, [currentMonth, currentYear, trainings]);
+  // Hardcoded weekly stats
+  const weeklyStats = [
+    { completed: "10.5", planned: "12.0" },
+    { completed: "15.2", planned: "16.8" },
+    { completed: "18.4", planned: "20.2" },
+    { completed: "21.0", planned: "23.1" },
+    { completed: "16.8", planned: "18.5" },
+    { completed: "5.3", planned: "6.0" }
+  ];
 
-  // Navegar al mes anterior
+  // Hardcoded trainings
+  const mockTrainings = {
+    "2025-03-03": { workoutType: "Easy Run", details: "40min @ 6:30/km" },
+    "2025-03-06": { workoutType: "Track Session", details: "10x400m" },
+    "2025-03-09": { workoutType: "Long Run", details: "18km @ 6:00/km" },
+    "2025-03-12": { workoutType: "Easy Run", details: "45min @ 6:30/km" },
+    "2025-03-15": { workoutType: "Quality Session", details: "Threshold 5x1000m" },
+    "2025-03-18": { workoutType: "Easy Run", details: "40min @ 6:30/km" },
+    "2025-03-19": { workoutType: "Day Off", details: "Rest day" },
+    "2025-03-21": { workoutType: "Garmin Training", details: "VO2max 6x800m" },
+    "2025-03-23": { workoutType: "Long Run", details: "21km @ 5:50/km" },
+    "2025-03-27": { workoutType: "Recuperación activa", details: "30min easy jog" },
+    "2025-03-30": { workoutType: "Track Session", details: "8x200m sprints" }
+  };
+
+  // Navegar al mes anterior (just for UI, doesn't actually change the data)
   const goToPreviousMonth = () => {
-    let newMonth = currentMonth - 1;
-    let newYear = currentYear;
-
-    if (newMonth < 0) {
-      newMonth = 11;
-      newYear--;
-    }
-
-    setCurrentMonth(newMonth);
-    setCurrentYear(newYear);
+    alert("Navigation functionality disabled in static version");
   };
 
-  // Navegar al mes siguiente
+  // Navegar al mes siguiente (just for UI, doesn't actually change the data)
   const goToNextMonth = () => {
-    let newMonth = currentMonth + 1;
-    let newYear = currentYear;
-
-    if (newMonth > 11) {
-      newMonth = 0;
-      newYear++;
-    }
-
-    setCurrentMonth(newMonth);
-    setCurrentYear(newYear);
+    alert("Navigation functionality disabled in static version");
   };
 
-  // Generar los días del calendario para el mes actual
-  const generateCalendarDays = () => {
-    const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-    const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
-
-    // Ajustar para comenzar el lunes (en getDay: 0 es domingo, 1 es lunes)
-    let firstDay = firstDayOfMonth.getDay() - 1;
-    if (firstDay === -1) firstDay = 6; // Si es domingo (0), lo ajustamos a 6
-
-    const lastDay = lastDayOfMonth.getDate();
-
-    // Días del mes anterior
-    const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
-    const prevMonthDays = Array.from({ length: firstDay }, (_, i) => ({
-      day: prevMonthLastDay - firstDay + i + 1,
-      month: currentMonth - 1 < 0 ? 11 : currentMonth - 1,
-      year: currentMonth - 1 < 0 ? currentYear - 1 : currentYear,
-      isCurrentMonth: false,
-    }));
-
-    // Días del mes actual
-    const currentMonthDays = Array.from({ length: lastDay }, (_, i) => ({
-      day: i + 1,
-      month: currentMonth,
-      year: currentYear,
-      isCurrentMonth: true,
-    }));
-
-    // Completar con días del mes siguiente
-    const totalCells = Math.ceil((firstDay + lastDay) / 7) * 7;
-    const nextMonthDays = Array.from(
-      { length: totalCells - (prevMonthDays.length + currentMonthDays.length) },
-      (_, i) => ({
-        day: i + 1,
-        month: currentMonth + 1 > 11 ? 0 : currentMonth + 1,
-        year: currentMonth + 1 > 11 ? currentYear + 1 : currentYear,
-        isCurrentMonth: false,
-      })
-    );
-
-    const allDays = [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
-
-    // Organizar en semanas
-    const weeks = [];
-    for (let i = 0; i < allDays.length; i += 7) {
-      weeks.push(allDays.slice(i, i + 7));
-    }
-
-    setCalendarDays(weeks);
-  };
-
-  // Calcular estadísticas semanales (distancia total)
-  const calculateWeeklyStats = () => {
-    if (!calendarDays.length) return;
-
-    const stats = calendarDays.map((week) => {
-      const weekStart = new Date(week[0].year, week[0].month, week[0].day);
-      const weekEnd = new Date(week[6].year, week[6].month, week[6].day);
-
-      // Sumar distancias de entrenamientos de esta semana
-      const weeklyDistanceKm = trainings
-        .filter((training) => {
-          const trainingDate = new Date(training.date);
-          return trainingDate >= weekStart && trainingDate <= weekEnd;
-        })
-        .reduce((total, training) => total + (training.totalDistance || 0), 0);
-
-      return {
-        completed: weeklyDistanceKm.toFixed(1),
-        planned: (weeklyDistanceKm * 1.1).toFixed(1), // Ejemplo: planeado es 10% más
-      };
-    });
-
-    setWeeklyStats(stats);
-  };
-
-  // Obtener entrenamientos para una fecha específica
+  // Obtener entrenamientos para una fecha específica (simplificado)
   const getTrainingsForDate = (day) => {
-    const date = new Date(day.year, day.month, day.day);
-
-    // Filtrar entrenamientos para esta fecha
-    return trainings.filter((training) => {
-      const trainingDate = new Date(training.date);
-      return (
-        trainingDate.getDate() === date.getDate() &&
-        trainingDate.getMonth() === date.getMonth() &&
-        trainingDate.getFullYear() === date.getFullYear()
-      );
-    });
+    const dateString = `${day.year}-${String(day.month + 1).padStart(2, '0')}-${String(day.day).padStart(2, '0')}`;
+    if (mockTrainings[dateString]) {
+      return [mockTrainings[dateString]];
+    }
+    return [];
   };
 
   // Determinar si un día es hoy
@@ -180,27 +140,13 @@ const TrainingCalendar = ({ trainings = [], workouts = [], user }) => {
     );
   };
 
-  // Mock de datos de entrenamiento (para demostración)
-  const mockWorkoutTypes = {
-    1: "Easy Run",
-    2: "Long Run Session",
-    3: "Track Session",
-    4: "Quality Session",
-    5: "Garmin Training",
-    6: "Day Off",
-    7: "Recuperación activa",
-  };
-
   // Componente de entrenamiento individual
-  const TrainingItem = ({ training, type }) => {
-    const workoutType =
-      training.workoutType ||
-      mockWorkoutTypes[Math.floor(Math.random() * 7) + 1];
-    const colorClass = workoutTypeColors[workoutType] || "bg-gray-500";
+  const TrainingItem = ({ training }) => {
+    const colorClass = workoutTypeColors[training.workoutType] || "bg-gray-500";
 
     return (
       <div className={`${colorClass} rounded-lg p-2 mb-1 text-xs`}>
-        <div className="font-medium">{workoutType}</div>
+        <div className="font-medium">{training.workoutType}</div>
         {training.details && (
           <div className="text-xs opacity-80">{training.details}</div>
         )}
@@ -210,7 +156,7 @@ const TrainingCalendar = ({ trainings = [], workouts = [], user }) => {
 
   return (
     <>
-      <div className="bg-zinc-900/50 text-gray-200 min-h-screen p-8 mx-30 rounded-xl shadow-lg ">
+      <div className="bg-zinc-900/50 text-gray-200 min-h-screen p-8 mx-30 rounded-xl shadow-lg">
         <div className="max-w-6xl mx-auto">
           {/* Header del calendario */}
           <div className="flex justify-between items-center mb-6">
@@ -240,16 +186,10 @@ const TrainingCalendar = ({ trainings = [], workouts = [], user }) => {
           <div className="grid grid-cols-7 gap-2 mb-2">
             <div className="text-center text-gray-400 font-medium">Monday</div>
             <div className="text-center text-gray-400 font-medium">Tuesday</div>
-            <div className="text-center text-gray-400 font-medium">
-              Wednesday
-            </div>
-            <div className="text-center text-gray-400 font-medium">
-              Thursday
-            </div>
+            <div className="text-center text-gray-400 font-medium">Wednesday</div>
+            <div className="text-center text-gray-400 font-medium">Thursday</div>
             <div className="text-center text-gray-400 font-medium">Friday</div>
-            <div className="text-center text-gray-400 font-medium">
-              Saturday
-            </div>
+            <div className="text-center text-gray-400 font-medium">Saturday</div>
             <div className="text-center text-gray-400 font-medium">Sunday</div>
 
             {/* Columna de total */}
@@ -296,75 +236,47 @@ const TrainingCalendar = ({ trainings = [], workouts = [], user }) => {
 
                       <div className="overflow-y-auto max-h-28">
                         {/* Entrenamientos del día */}
-                        {trainingsForDay.length > 0
-                          ? trainingsForDay.map((training, idx) => (
-                              <TrainingItem
-                                key={`training-${idx}`}
-                                training={training}
-                              />
-                            ))
-                          : // Mock data para demostración
-                            day.isCurrentMonth &&
-                            (day.day % 3 === 0 || day.day % 7 === 0) && (
-                              <TrainingItem
-                                training={{
-                                  workoutType:
-                                    Object.values(mockWorkoutTypes)[
-                                      day.day % 7
-                                    ],
-                                  details: `${
-                                    day.day % 3 === 0
-                                      ? "40min @ 6:30/km"
-                                      : "60min warm up"
-                                  }`,
-                                }}
-                              />
-                            )}
+                        {trainingsForDay.map((training, idx) => (
+                          <TrainingItem
+                            key={`training-${idx}`}
+                            training={training}
+                          />
+                        ))}
                       </div>
                     </div>
                   );
                 })}
-
-                {/* Totales semanales */}
               </div>
-                <div className=" bg-zinc-800 rounded-lg p-2 min-h-20  flex items-center justify-end mt-2">
-                  <div className="flex flex-col items-end">
-                    <div className="text-2xl font-bold">
-                      {weeklyStats[weekIndex]?.completed || "0.0"}km
-                    </div>
-                    <div className="text-sm text-gray-400">completed</div>
-                    <div className="text-xs text-gray-500 mt-1">
-                      of {weeklyStats[weekIndex]?.planned || "0.0"}km
-                    </div>
+              {/* Totales semanales */}
+              <div className="bg-zinc-800 rounded-lg p-2 min-h-20 flex items-center justify-end mt-2">
+                <div className="flex flex-col items-end">
+                  <div className="text-2xl font-bold">
+                    {weeklyStats[weekIndex]?.completed}km
                   </div>
-                  <div className="ml-4">
-                    <div className="w-16 h-16 rounded-full border-4 border-gray-600 flex items-center justify-center relative">
-                      <div
-                        className="absolute inset-0 rounded-full border-4 border-blue-500"
-                        style={{
-                          clipPath: `polygon(0 0, 100% 0, 100% 100%, 0% 100%)`,
-                          opacity: 0.7,
-                        }}
-                      ></div>
-                      <BarChart3 size={24} className="text-gray-400" />
-                    </div>
+                  <div className="text-sm text-gray-400">completed</div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    of {weeklyStats[weekIndex]?.planned}km
                   </div>
                 </div>
+                <div className="ml-4">
+                  <div className="w-16 h-16 rounded-full border-4 border-gray-600 flex items-center justify-center relative">
+                    <div
+                      className="absolute inset-0 rounded-full border-4 border-blue-500"
+                      style={{
+                        clipPath: `polygon(0 0, 100% 0, 100% 100%, 0% 100%)`,
+                        opacity: 0.7,
+                      }}
+                    ></div>
+                    <BarChart3 size={24} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
-
-          {/* Control de navegación de meses */}
-          {/* <div className="flex justify-center mt-6">
-            <button
-              onClick={() => {}}
-              className="bg-gray-800 hover:bg-gray-700 py-2 px-4 rounded-lg text-sm"
-            >
-              SHOW NEXT 3 MONTHS
-            </button>
-          </div> */}
         </div>
       </div>
     </>
   );
 };
+
 export default TrainingCalendar;

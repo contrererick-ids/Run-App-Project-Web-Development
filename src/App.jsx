@@ -9,19 +9,21 @@ import AddActivity from "./pages/AddActivity";
 
 function App() {
   return (
-    <>
-      <Router>
+    <Router>
+      <div className="app-container"> {/* Add a wrapper div */}
         <Header />
+        <main> {/* Consider adding a main element for better structure */}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/SignIn" element={<Login />} />
+            <Route path="/signin" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/Profile" element={<Profile />} />
-            <Route path="/AddActivity" element={<AddActivity />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/addActivity" element={<AddActivity />} />
           </Routes>
+        </main>
         <Footer />
-      </Router>
-    </>
+      </div>
+    </Router>
   );
 }
 

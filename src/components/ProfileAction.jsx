@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const ProfileAction = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,7 +54,7 @@ const ProfileAction = () => {
             {/* Lista de notificaciones */}
             <div className="space-y-1">
                 <div>
-                    <Link to="/Profile" className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0">
+                    <NavLink to="/profile" className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0">
                       <div className="flex items-start">
                         <div className="flex-shrink-0 mr-3">
                         </div>
@@ -64,10 +64,10 @@ const ProfileAction = () => {
                           </p>
                         </div>
                       </div>
-                    </Link>
+                    </NavLink>
                 </div>
                 <div>
-                    <Link to="/AddActivity" className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0">
+                    <NavLink to="/addActivity" className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0">
                       <div className="flex items-start">
                         <div className="flex-shrink-0 mr-3">
                         </div>
@@ -77,7 +77,7 @@ const ProfileAction = () => {
                           </p>
                         </div>
                       </div>
-                    </Link>
+                    </NavLink>
                 </div>
                 <div>
                     <button className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0 w-full text-start cursor-pointer">
