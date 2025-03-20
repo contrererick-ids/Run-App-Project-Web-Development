@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, BarChart3 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const TrainingCalendar = () => {
   const [currentMonth, setCurrentMonth] = useState(2); // March (0-indexed)
@@ -243,6 +244,11 @@ const TrainingCalendar = () => {
                           />
                         ))}
                       </div>
+                        <button>
+                          <Link to={'/addActivity'}>
+                            <div className="text-xs text-center text-gray-400 hover:bg-gray-500/30 p-2 rounded-md min-w-full justify-center">Add activity</div>
+                          </Link>
+                        </button>
                     </div>
                   );
                 })}
