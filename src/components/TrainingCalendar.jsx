@@ -19,8 +19,18 @@ const TrainingCalendar = () => {
 
   // Nombres de los meses
   const months = [
-    "January", "February", "March", "April", "May", "June", 
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   // Hardcoded calendar days for March 2025
@@ -33,7 +43,7 @@ const TrainingCalendar = () => {
       { day: 27, month: 1, year: 2025, isCurrentMonth: false },
       { day: 28, month: 1, year: 2025, isCurrentMonth: false },
       { day: 1, month: 2, year: 2025, isCurrentMonth: true },
-      { day: 2, month: 2, year: 2025, isCurrentMonth: true }
+      { day: 2, month: 2, year: 2025, isCurrentMonth: true },
     ],
     // Week 2
     [
@@ -43,7 +53,7 @@ const TrainingCalendar = () => {
       { day: 6, month: 2, year: 2025, isCurrentMonth: true },
       { day: 7, month: 2, year: 2025, isCurrentMonth: true },
       { day: 8, month: 2, year: 2025, isCurrentMonth: true },
-      { day: 9, month: 2, year: 2025, isCurrentMonth: true }
+      { day: 9, month: 2, year: 2025, isCurrentMonth: true },
     ],
     // Week 3
     [
@@ -53,7 +63,7 @@ const TrainingCalendar = () => {
       { day: 13, month: 2, year: 2025, isCurrentMonth: true },
       { day: 14, month: 2, year: 2025, isCurrentMonth: true },
       { day: 15, month: 2, year: 2025, isCurrentMonth: true },
-      { day: 16, month: 2, year: 2025, isCurrentMonth: true }
+      { day: 16, month: 2, year: 2025, isCurrentMonth: true },
     ],
     // Week 4
     [
@@ -63,7 +73,7 @@ const TrainingCalendar = () => {
       { day: 20, month: 2, year: 2025, isCurrentMonth: true },
       { day: 21, month: 2, year: 2025, isCurrentMonth: true },
       { day: 22, month: 2, year: 2025, isCurrentMonth: true },
-      { day: 23, month: 2, year: 2025, isCurrentMonth: true }
+      { day: 23, month: 2, year: 2025, isCurrentMonth: true },
     ],
     // Week 5
     [
@@ -73,7 +83,7 @@ const TrainingCalendar = () => {
       { day: 27, month: 2, year: 2025, isCurrentMonth: true },
       { day: 28, month: 2, year: 2025, isCurrentMonth: true },
       { day: 29, month: 2, year: 2025, isCurrentMonth: true },
-      { day: 30, month: 2, year: 2025, isCurrentMonth: true }
+      { day: 30, month: 2, year: 2025, isCurrentMonth: true },
     ],
     // Week 6 (March/April)
     [
@@ -83,8 +93,8 @@ const TrainingCalendar = () => {
       { day: 3, month: 3, year: 2025, isCurrentMonth: false },
       { day: 4, month: 3, year: 2025, isCurrentMonth: false },
       { day: 5, month: 3, year: 2025, isCurrentMonth: false },
-      { day: 6, month: 3, year: 2025, isCurrentMonth: false }
-    ]
+      { day: 6, month: 3, year: 2025, isCurrentMonth: false },
+    ],
   ];
 
   // Hardcoded weekly stats
@@ -94,7 +104,7 @@ const TrainingCalendar = () => {
     { completed: "18.4", planned: "20.2" },
     { completed: "21.0", planned: "23.1" },
     { completed: "16.8", planned: "18.5" },
-    { completed: "5.3", planned: "6.0" }
+    { completed: "5.3", planned: "6.0" },
   ];
 
   // Hardcoded trainings
@@ -103,13 +113,19 @@ const TrainingCalendar = () => {
     "2025-03-06": { workoutType: "Track Session", details: "10x400m" },
     "2025-03-09": { workoutType: "Long Run", details: "18km @ 6:00/km" },
     "2025-03-12": { workoutType: "Easy Run", details: "45min @ 6:30/km" },
-    "2025-03-15": { workoutType: "Quality Session", details: "Threshold 5x1000m" },
+    "2025-03-15": {
+      workoutType: "Quality Session",
+      details: "Threshold 5x1000m",
+    },
     "2025-03-18": { workoutType: "Easy Run", details: "40min @ 6:30/km" },
     "2025-03-19": { workoutType: "Day Off", details: "Rest day" },
     "2025-03-21": { workoutType: "Garmin Training", details: "VO2max 6x800m" },
     "2025-03-23": { workoutType: "Long Run", details: "21km @ 5:50/km" },
-    "2025-03-27": { workoutType: "Recuperación activa", details: "30min easy jog" },
-    "2025-03-30": { workoutType: "Track Session", details: "8x200m sprints" }
+    "2025-03-27": {
+      workoutType: "Recuperación activa",
+      details: "30min easy jog",
+    },
+    "2025-03-30": { workoutType: "Track Session", details: "8x200m sprints" },
   };
 
   // Navegar al mes anterior (just for UI, doesn't actually change the data)
@@ -124,7 +140,10 @@ const TrainingCalendar = () => {
 
   // Obtener entrenamientos para una fecha específica (simplificado)
   const getTrainingsForDate = (day) => {
-    const dateString = `${day.year}-${String(day.month + 1).padStart(2, '0')}-${String(day.day).padStart(2, '0')}`;
+    const dateString = `${day.year}-${String(day.month + 1).padStart(
+      2,
+      "0"
+    )}-${String(day.day).padStart(2, "0")}`;
     if (mockTrainings[dateString]) {
       return [mockTrainings[dateString]];
     }
@@ -187,10 +206,16 @@ const TrainingCalendar = () => {
           <div className="grid grid-cols-7 gap-2 mb-2">
             <div className="text-center text-gray-400 font-medium">Monday</div>
             <div className="text-center text-gray-400 font-medium">Tuesday</div>
-            <div className="text-center text-gray-400 font-medium">Wednesday</div>
-            <div className="text-center text-gray-400 font-medium">Thursday</div>
+            <div className="text-center text-gray-400 font-medium">
+              Wednesday
+            </div>
+            <div className="text-center text-gray-400 font-medium">
+              Thursday
+            </div>
             <div className="text-center text-gray-400 font-medium">Friday</div>
-            <div className="text-center text-gray-400 font-medium">Saturday</div>
+            <div className="text-center text-gray-400 font-medium">
+              Saturday
+            </div>
             <div className="text-center text-gray-400 font-medium">Sunday</div>
 
             {/* Columna de total */}
@@ -244,11 +269,15 @@ const TrainingCalendar = () => {
                           />
                         ))}
                       </div>
+                      {day.isCurrentMonth && (
                         <button>
-                          <Link to={'/addActivity'}>
-                            <div className="text-xs text-center text-gray-400 hover:bg-gray-500/30 p-2 rounded-md min-w-full justify-center">Add activity</div>
+                          <Link to={"/addActivity"}>
+                            <div className="text-xs text-center text-gray-400 hover:bg-gray-500/30 p-2 rounded-md min-w-full justify-center">
+                              Add activity
+                            </div>
                           </Link>
                         </button>
+                      )}
                     </div>
                   );
                 })}
