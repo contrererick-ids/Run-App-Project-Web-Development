@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAuthStore from "../store/authStore";
 import axios from "axios";
+import VDotModal from "../components/VDotModal";
 
 const API_URL = "https://web-back-4n3m.onrender.com";
 
@@ -10,8 +11,13 @@ const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalType, setModalType] = useState("upcoming"); // 'upcoming' or 'recent']
+  const [isVDotModalOpen, setIsVDotModalOpen] = useState(false);
+
+  // Update vdot modal
+  const handleVDotUpdate = (updatedUser) => {
+    setUserData(updatedUser);
+    setIsVDotModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -119,7 +125,7 @@ const Profile = () => {
                 <p className="capitalize">Username: {userData.username}</p>
                 <p>Email: {userData.email}</p>
               </div>
-              <Link>
+              <Link to={"/editProfile"}>
                 <button className="text-blue-100 hover:text-blue-50 cursor-pointer text-sm mt-1 border rounded-2xl px-5 py-1 bg-blue-100/30 backdrop-blur-lg border-neutral-50/5 shadow-2xl">
                   Edit Profile
                 </button>
@@ -127,7 +133,7 @@ const Profile = () => {
             </div>
 
             <div className="mt-4 md:mt-0">
-              <div className="border-4 border-gray-300 bg-sky-400/10 backdrop-blur-2xl rounded-full w-32 h-32 flex items-center justify-center">
+              <div className="border-4 border-gray-300 bg-sky-400/10 backdrop-blur-2xl rounded-full w-32 h-32 flex items-center justify-center relative">
                 <div className="text-center">
                   <div className="text-md text-sky-400 font-extrabold">
                     VDOT
@@ -136,6 +142,20 @@ const Profile = () => {
                     {userData.vDot?.value || "--"}
                   </div>
                 </div>
+                <button
+                  onClick={() => setIsVDotModalOpen(true)}
+                  className="absolute -bottom-2 -right-2 bg-sky-600 hover:bg-sky-700 text-white rounded-full p-2 cursor-pointer"
+                  title="Edit VDOT"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
@@ -158,13 +178,13 @@ const Profile = () => {
                 <th className="py-3 text-left text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
                   Distance
                 </th>
-                <th className="py-3 text-left text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
+                <th className="py-3 text-center text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
                   Time
                 </th>
-                <th className="py-3 text-left text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
+                <th className="py-3 text-center text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
                   Date
                 </th>
-                <th className="py-3 text-left text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
+                <th className="py-3 text-center text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
                   Location
                 </th>
               </tr>
@@ -174,16 +194,16 @@ const Profile = () => {
                 (distance) =>
                   userData.personalBests?.[distance]?.time && (
                     <tr key={distance}>
-                      <td className="py-3 text-md text-sky-400 hover:text-sky-500 text-start pl-5 capitalize">
+                      <td className="py-3 text-md  text-sky-400 hover:text-sky-500 text-start pl-5 capitalize font-extrabold">
                         {distance.replace(/([A-Z])/g, " $1").trim()}
                       </td>
-                      <td className="py-3 text-md text-neutral-100 font-bold">
+                      <td className="py-3 text-md text-center text-neutral-100 font-bold">
                         {userData.personalBests[distance].time}
                       </td>
-                      <td className="py-3 text-md text-neutral-100">
+                      <td className="py-3 text-md text-center text-neutral-100 font-bold">
                         {formatDate(userData.personalBests[distance].date)}
                       </td>
-                      <td className="py-3 text-md text-neutral-100">
+                      <td className="py-3 text-md text-center text-neutral-100 font-bold">
                         {userData.personalBests[distance].location || "N/A"}
                       </td>
                     </tr>
@@ -220,6 +240,46 @@ const Profile = () => {
             </button>
           </Link>
         </div>
+        {userData.upcomingRaces?.length > 0 ? (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y-2 divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="py-3 text-left text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th className="py-3 text-center text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
+                    Date
+                  </th>
+                  <th className="py-3 text-center text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
+                    Expected Time
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {userData.upcomingRaces.map((race, index) => (
+                  <tr key={race._id || index}>
+                    {" "}
+                    {/* Use race._id if available, otherwise fallback to index */}
+                    <td className="py-3 text-md text-sky-400 hover:text-sky-500 text-start pl-5 capitalize font-extrabold">
+                      {race.name}
+                    </td>
+                    <td className="py-3 text-md text-center text-neutral-100 font-bold">
+                      {formatDate(race.date)}
+                    </td>
+                    <td className="py-3 text-center text-md text-neutral-100 font-bold">
+                      {race.projectedTime}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="text-center py-10 text-gray-400">
+            <p>No Recent Races 😞</p>
+          </div>
+        )}
       </div>
 
       {/* Recent Races */}
@@ -256,30 +316,32 @@ const Profile = () => {
                   <th className="py-3 text-left text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
                     Name
                   </th>
-                  <th className="py-3 text-left text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
+                  <th className="py-3 text-center text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
                     Date
                   </th>
-                  <th className="py-3 text-left text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
+                  <th className="py-3 text-center text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
                     Distance (km)
                   </th>
-                  <th className="py-3 text-left text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
+                  <th className="py-3 text-center text-lg font-medium text-gray-100 px-5 uppercase tracking-wider">
                     Time
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {userData.recentRaces.map((race) => (
-                  <tr>
-                    <td className="py-3 text-md text-sky-400 hover:text-sky-500 text-start pl-5 capitalize">
+                {userData.recentRaces.map((race, index) => (
+                  <tr key={race._id || index}>
+                    {" "}
+                    {/* Use race._id if available, otherwise fallback to index */}
+                    <td className="py-3 text-md font-extrabold text-sky-400 hover:text-sky-500 text-start pl-5 capitalize">
                       {race.name}
                     </td>
-                    <td className="py-3 text-md text-neutral-100 font-bold">
-                      {race.date}
+                    <td className="py-3 text-center text-md text-neutral-100 font-bold">
+                      {formatDate(race.date)}
                     </td>
-                    <td className="py-3 text-md text-neutral-100">
+                    <td className="py-3 text-center text-md text-neutral-100 font-bold">
                       {race.distance}
                     </td>
-                    <td className="py-3 text-md text-neutral-100">
+                    <td className="py-3 text-center text-md text-neutral-100 font-bold">
                       {race.time}
                     </td>
                   </tr>
@@ -319,6 +381,12 @@ const Profile = () => {
           </div>
         </div>
       )}
+      <VDotModal
+        isOpen={isVDotModalOpen}
+        onClose={() => setIsVDotModalOpen(false)}
+        user={userData}
+        onUpdate={handleVDotUpdate}
+      />
     </div>
   );
 };
