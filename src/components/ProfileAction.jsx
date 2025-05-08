@@ -45,8 +45,8 @@ const ProfileAction = () => {
         >
           {isAuthenticated ? (
             <img
-              className="w-10 h-10 rounded-full"
-              src={user?.profileImage || "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"}
+              className="w-12 h-12 rounded-full"
+              src={user?.avatar || "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"}
               alt={user?.name || "Profile"}
             />
           ) : (
