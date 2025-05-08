@@ -105,6 +105,11 @@ const useAuthStore = create((set) => ({
       });
     }
   },
+
+  // Update user profile
+  updateUser: (updates) => set((state) => ({
+    user: { ...state.user, ...updates }
+  })),
   
   // Clear error
   clearError: () => set({ error: null })

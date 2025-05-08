@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useAuthStore from "../store/authStore";
 import axios from "axios";
 import VDotModal from "../components/VDotModal";
+import EditProfilePic from "../components/EditProfilePic";
 
 const API_URL = "https://web-back-4n3m.onrender.com";
 
@@ -102,17 +103,10 @@ const Profile = () => {
       {/* User Profile */}
       <div className="flex flex-col md:flex-row items-center md:items-center gap-6 mb-8">
         <div className="relative justify-center items-center">
-          <img
-            src={
-              userData?.avatar ||
-              "https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg"
-            }
-            className="w-32 h-32 rounded-full object-cover border-2 border-gray-200"
-            alt="Profile"
+          <EditProfilePic
+            currentAvatar={userData.avatar}
+            userId={userData._id}
           />
-          <button className="text-sm text-neutral-100 hover:text-blue-100 mt-2 block px-7">
-            Edit Photo
-          </button>
         </div>
 
         <div className="flex-1">
@@ -259,7 +253,6 @@ const Profile = () => {
               <tbody className="divide-y divide-gray-200">
                 {userData.upcomingRaces.map((race, index) => (
                   <tr key={race._id || index}>
-                    {" "}
                     {/* Use race._id if available, otherwise fallback to index */}
                     <td className="py-3 text-md text-sky-400 hover:text-sky-500 text-start pl-5 capitalize font-extrabold">
                       {race.name}
@@ -330,7 +323,6 @@ const Profile = () => {
               <tbody className="divide-y divide-gray-200">
                 {userData.recentRaces.map((race, index) => (
                   <tr key={race._id || index}>
-                    {" "}
                     {/* Use race._id if available, otherwise fallback to index */}
                     <td className="py-3 text-md font-extrabold text-sky-400 hover:text-sky-500 text-start pl-5 capitalize">
                       {race.name}
