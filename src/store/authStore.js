@@ -106,10 +106,20 @@ const useAuthStore = create((set) => ({
     }
   },
 
-  // Update user profile
+  // Update user profile (partial update)
   updateUser: (updates) => set((state) => ({
     user: { ...state.user, ...updates }
   })),
+  
+  // Set complete user object (complete replacement)
+  setUser: (userData) => {
+    // También actualizamos en localStorage
+    localStorage.setItem('user', JSON.stringify(userData));
+    
+    set({
+      user: userData
+    });
+  },
   
   // Clear error
   clearError: () => set({ error: null })

@@ -51,13 +51,15 @@ const EditProfilePic = ({ currentAvatar ,userId }) => {
     );
   }
 
+  const defaultAvatar = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
+
   return (
     <>
       <div className="relative group">
         <img
           src={
             currentAvatar ||
-            "https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg"
+            defaultAvatar
           }
           className="w-32 h-32 rounded-full object-cover border-2 border-gray-200"
           alt="Profile"

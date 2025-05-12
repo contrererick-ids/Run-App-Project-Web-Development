@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/ProtectedRoute"; // Import the Protecte
 import useAuthStore from "./store/authStore"; // Import the auth store
 import { Navigate } from "react-router-dom";
 import AddUpcomingRace from "./pages/AddUpcomingRace";
+import UserSetup from "./pages/UserSetup";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               <Route path="/addActivity" element={<AddActivity />} />
               <Route path="/addRecentRace" element={<AddRecentRace />} />
               <Route path="/addUpcomingRace" element={<AddUpcomingRace />} />
+              <Route path="/userSetUp" element={<UserSetup/>}/>
             </Route>
             {/* Redirect to signin by default */}
             <Route path="/*" element={<Navigate to="/signin" replace />} />
