@@ -203,34 +203,45 @@ const TrainingCalendar = () => {
           </div>
 
           {/* Días de la semana */}
-          <div className="grid grid-cols-7 gap-2 mb-2">
-            <div className="text-center text-gray-400 font-medium">Monday</div>
-            <div className="text-center text-gray-400 font-medium">Tuesday</div>
+          <div className="hidden sm:grid grid-cols-7 gap-2 mb-2">
             <div className="text-center text-gray-400 font-medium">
-              Wednesday
+              <span className="hidden lg:inline">Monday</span>
+              <span className="hidden sm:inline lg:hidden">Mon</span>
             </div>
             <div className="text-center text-gray-400 font-medium">
-              Thursday
+              <span className="hidden lg:inline">Tuesday</span>
+              <span className="hidden sm:inline lg:hidden">Tue</span>
             </div>
-            <div className="text-center text-gray-400 font-medium">Friday</div>
             <div className="text-center text-gray-400 font-medium">
-              Saturday
+              <span className="hidden lg:inline">Wednesday</span>
+              <span className="hidden sm:inline lg:hidden">Wed</span>
             </div>
-            <div className="text-center text-gray-400 font-medium">Sunday</div>
-
-            {/* Columna de total */}
-            <div className="col-span-7 text-right text-gray-400 font-medium pr-4">
-              Total
+            <div className="text-center text-gray-400 font-medium">
+              <span className="hidden lg:inline">Thursday</span>
+              <span className="hidden sm:inline lg:hidden">Thu</span>
+            </div>
+            <div className="text-center text-gray-400 font-medium">
+              <span className="hidden lg:inline">Friday</span>
+              <span className="hidden sm:inline lg:hidden">Fri</span>
+            </div>
+            <div className="text-center text-gray-400 font-medium">
+              <span className="hidden lg:inline">Saturday</span>
+              <span className="hidden sm:inline lg:hidden">Sat</span>
+            </div>
+            <div className="text-center text-gray-400 font-medium">
+              <span className="hidden lg:inline">Sunday</span>
+              <span className="hidden sm:inline lg:hidden">Sun</span>
             </div>
           </div>
 
           {/* Semanas */}
           {calendarDays.map((week, weekIndex) => (
             <div key={`week-${weekIndex}`} className="mb-4 relative">
-              <div className="grid grid-cols-7 gap-2">
+              <div className="grid xs:grid-cols-1 sm:grid-cols-7 gap-2">
                 {week.map((day, dayIndex) => {
                   const trainingsForDay = getTrainingsForDate(day);
                   const isCurrentDay = isToday(day);
+                  const dayLetters = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
                   return (
                     <div
@@ -242,17 +253,20 @@ const TrainingCalendar = () => {
                             : "bg-zinc-900 text-zinc-500"
                         } 
                         ${isCurrentDay ? "border-2 border-blue-500" : ""} 
-                        rounded-lg p-2 min-h-32 relative
+                        rounded-lg p-2 min-h-32 relative xs:flex xs:justify-between sm:block
                         `}
                     >
-                      <div className="flex justify-between items-center mb-2">
-                        <span
-                          className={`${
-                            isCurrentDay ? "text-blue-500 font-bold" : ""
-                          }`}
-                        >
-                          {day.day}
-                        </span>
+                      <div className="flex justify-between items-center mb-2 xs:w-1/3 sm:w-full">
+                        <div className="flex items-center gap-1">
+                          <span className="sm:hidden text-gray-400">{dayLetters[dayIndex]}</span>
+                          <span
+                            className={`${
+                              isCurrentDay ? "text-blue-500 font-bold" : ""
+                            }`}
+                          >
+                            {day.day}
+                          </span>
+                        </div>
                         {isCurrentDay && (
                           <span className="text-xs font-medium text-blue-500">
                             Today
@@ -284,25 +298,27 @@ const TrainingCalendar = () => {
               </div>
               {/* Totales semanales */}
               <div className="bg-zinc-800 rounded-lg p-2 min-h-20 flex items-center justify-end mt-2">
-                <div className="flex flex-col items-end">
-                  <div className="text-2xl font-bold">
+                <div className="flex flex-col items-end xs:text-right sm:text-right">
+                  <div className="text-base sm:text-lg md:text-2xl font-bold">
                     {weeklyStats[weekIndex]?.completed}km
                   </div>
-                  <div className="text-sm text-gray-400">completed</div>
-                  <div className="text-xs text-gray-500 mt-1">
+                  <div className="text-[10px] sm:text-xs md:text-sm text-gray-400">completed</div>
+                  <div className="text-[8px] sm:text-xs text-gray-500 mt-1">
                     of {weeklyStats[weekIndex]?.planned}km
                   </div>
                 </div>
-                <div className="ml-4">
-                  <div className="w-16 h-16 rounded-full border-4 border-gray-600 flex items-center justify-center relative">
+                <div className="ml-2 sm:ml-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full border-2 sm:border-4 border-gray-600 flex items-center justify-center relative">
                     <div
-                      className="absolute inset-0 rounded-full border-4 border-blue-500"
+                      className="absolute inset-0 rounded-full border-2 sm:border-4 border-blue-500"
                       style={{
                         clipPath: `polygon(0 0, 100% 0, 100% 100%, 0% 100%)`,
                         opacity: 0.7,
                       }}
                     ></div>
-                    <BarChart3 size={24} className="text-gray-400" />
+                    <BarChart3 size={14} className="text-gray-400 sm:hidden" />
+                    <BarChart3 size={16} className="text-gray-400 hidden sm:block md:hidden" />
+                    <BarChart3 size={24} className="text-gray-400 hidden md:block" />
                   </div>
                 </div>
               </div>
