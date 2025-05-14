@@ -1,18 +1,20 @@
 import { useState, useEffect, useRef } from "react";
-import { X } from "lucide-react";
+import { LogIn, UserPlus, User, PlusCircle, LogOut } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import useAuthStore from "../store/authStore"; // Make sure the import matches your file structure
 
 const ProfileAction = () => {
+  const { user, isAuthenticated, signOut } = useAuthStore(); // Get auth state from store
   const [isOpen, setIsOpen] = useState(false);
   const panelRef = useRef(null);
 
-  // Cierra el panel cuando se hace clic fuera de él
+  // Close panel when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
         panelRef.current &&
         !panelRef.current.contains(event.target) &&
-        !event.target.closest(".notification-bell")
+        !event.target.closest(".profile-button")
       ) {
         setIsOpen(false);
       }
@@ -28,19 +30,31 @@ const ProfileAction = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleLogout = () => {
+    signOut();
+    setIsOpen(false);
+  };
+
   return (
     <>
       <div className="relative">
-        {/* Profile icon */}
-        <button className="focus:outline-none w-12.5 h-12.5 rounded-full bg-neutral-400 items-center flex justify-center hover:bg-neutral-500 cursor-pointer" onClick={togglePanel}>
-          <img
-            className="w-10 h-10 rounded-full"
-            src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
-            alt="Profile"
-          />
+        {/* Profile icon - Shows user image if authenticated, placeholder if not */}
+        <button 
+          className="profile-button focus:outline-none w-12.5 h-12.5 rounded-full bg-neutral-400 items-center flex justify-center hover:bg-neutral-500 cursor-pointer" 
+          onClick={togglePanel}
+        >
+          {isAuthenticated ? (
+            <img
+              className="w-12 h-12 rounded-full"
+              src={user?.avatar || "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"}
+              alt={user?.name || "Profile"}
+            />
+          ) : (
+            <User className="w-6 h-6 text-white" />
+          )}
         </button>
 
-        {/* Profile actions */}
+        {/* Profile actions panel */}
         {isOpen && (
           <div
             ref={panelRef}
@@ -50,48 +64,98 @@ const ProfileAction = () => {
               overflowY: "auto",
             }}
           >
+            {/* Panel header - Show user info if authenticated */}
+            {isAuthenticated && (
+              <div className="px-4 py-3 border-b border-gray-700">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0 mr-3">
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src={user?.profileImage || "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"}
+                      alt={user?.name || "Profile"}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-white">{user?.name || "User"}</p>
+                    <p className="text-xs text-gray-400">{user?.email || ""}</p>
+                  </div>
+                </div>
+              </div>
+            )}
 
-            {/* Lista de notificaciones */}
+            {/* Menu options */}
             <div className="space-y-1">
-                <div>
-                    <NavLink to="/profile" className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0">
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0 mr-3">
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm text-gray-100">
-                            Profile
-                          </p>
-                        </div>
+              {isAuthenticated ? (
+                // Options for authenticated users
+                <>
+                  <NavLink 
+                    to="/profile" 
+                    className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="flex items-center">
+                      <User className="w-5 h-5 mr-3 text-gray-300" />
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-100">Profile</p>
                       </div>
-                    </NavLink>
-                </div>
-                <div>
-                    <NavLink to="/addActivity" className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0">
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0 mr-3">
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm text-gray-100">
-                            Add Activity
-                          </p>
-                        </div>
+                    </div>
+                  </NavLink>
+                  
+                  <NavLink 
+                    to="/addActivity" 
+                    className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="flex items-center">
+                      <PlusCircle className="w-5 h-5 mr-3 text-gray-300" />
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-100">Add Activity</p>
                       </div>
-                    </NavLink>
-                </div>
-                <div>
-                    <button className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0 w-full text-start cursor-pointer">
-                      <div className="flex items-start">
-                        <div className="flex-shrink-0 mr-3">
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm text-gray-100">
-                            Log Out
-                          </p>
-                        </div>
+                    </div>
+                  </NavLink>
+                  
+                  <button 
+                    onClick={handleLogout}
+                    className="block w-full px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0 text-start cursor-pointer"
+                  >
+                    <div className="flex items-center">
+                      <LogOut className="w-5 h-5 mr-3 text-gray-300" />
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-100">Log Out</p>
                       </div>
-                    </button>
-                </div>
+                    </div>
+                  </button>
+                </>
+              ) : (
+                // Options for non-authenticated users
+                <>
+                  <NavLink 
+                    to="/signin" 
+                    className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="flex items-center">
+                      <LogIn className="w-5 h-5 mr-3 text-gray-300" />
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-100">Sign In</p>
+                      </div>
+                    </div>
+                  </NavLink>
+                  
+                  <NavLink 
+                    to="/signup" 
+                    className="block px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="flex items-center">
+                      <UserPlus className="w-5 h-5 mr-3 text-gray-300" />
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-100">Sign Up</p>
+                      </div>
+                    </div>
+                  </NavLink>
+                </>
+              )}
             </div>
           </div>
         )}
@@ -99,4 +163,5 @@ const ProfileAction = () => {
     </>
   );
 };
+
 export default ProfileAction;
