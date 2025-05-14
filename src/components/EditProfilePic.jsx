@@ -72,7 +72,7 @@ const EditProfilePic = ({ currentAvatar ,userId }) => {
           {isLoading ? (
             <CgSpinner size="sm" />
           ) : (
-            <span className="text-white text-sm font-medium">Cambiar foto</span>
+            <span className="text-white text-sm font-medium">Edit Profile Picture</span>
           )}
         </label>
 
