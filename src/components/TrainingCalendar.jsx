@@ -3,8 +3,8 @@ import { ChevronLeft, ChevronRight, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const TrainingCalendar = () => {
-  const [currentMonth, setCurrentMonth] = useState(2); // March (0-indexed)
-  const [currentYear, setCurrentYear] = useState(2025);
+  const [currentMonth] = useState(2); // March (0-indexed)
+  const [currentYear] = useState(2025);
 
   // Mapeo de tipos de entrenamiento a colores
   const workoutTypeColors = {

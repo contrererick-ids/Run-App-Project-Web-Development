@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { uploadProfileImage } from "../utils/fireStore.js"; // Asegúrate de que esta función esté correctamente importada
 import useAuthStore from "../store/authStore.js"
-import { storage } from "../firebase.js";
+//import { storage } from "../firebase.js";
 import { CgSpinner } from "react-icons/cg";
 
 
@@ -24,7 +24,7 @@ const EditProfilePic = ({ currentAvatar ,userId }) => {
       const imageUrl = await uploadProfileImage(userId, file);
 
       // 2. Actualizar en tu backend
-      const response = await axios.put(
+      await axios.put(
         `${API_URL}/api/v1/user/${userId}`,
         { avatar: imageUrl },
         {

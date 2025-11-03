@@ -67,7 +67,7 @@ const AddActivity = () => {
       newWorkout: { ...initialWorkoutState },
     }))
   );
-  const [totalDistance, setTotalDistance] = useState(0);
+  const [totalDistance] = useState(0);
   const [activeDay, setActiveDay] = useState(null);
   const [savedWorkouts, setSavedWorkouts] = useState([]);
   const [loading, setLoading] = useState(false);
