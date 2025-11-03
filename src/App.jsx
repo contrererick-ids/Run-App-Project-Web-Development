@@ -8,7 +8,7 @@ import Profile from "./pages/Profile";
 import AddActivity from "./pages/AddActivity";
 import AddRecentRace from "./pages/AddRecentRace";
 import ProtectedRoute from "./components/ProtectedRoute"; // Import the ProtectedRoute component
-import useAuthStore from "./store/authStore"; // Import the auth store
+//import useAuthStore from "./store/authStore"; // Import the auth store
 import { Navigate } from "react-router-dom";
 import AddUpcomingRace from "./pages/AddUpcomingRace";
 import UserSetup from "./pages/UserSetup";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import useAuthStore from "../store/authStore";
+//import useAuthStore from "../store/authStore";
 
 const VDotModal = ({ isOpen, onClose, user, onUpdate }) => {
   const [vdotValue, setVdotValue] = useState(user?.vDot?.value || "");

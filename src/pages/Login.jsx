@@ -26,7 +26,8 @@ const SignIn = () => {
 
     // Clear any previous errors when component mounts
     return () => clearError();
-  }, [isAuthenticated, navigate, clearError]);
+  }, [isAuthenticated, user?.vDot.value, navigate, clearError]);
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

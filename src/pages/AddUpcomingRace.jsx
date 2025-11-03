@@ -9,16 +9,7 @@ const AddUpcomingRace = () => {
   const navigate = useNavigate();
   const API_URL = "https://web-back-4n3m.onrender.com";
   // Check if user exists
-  if (!user) {
-    console.error("User not found");
-    return null;
-  }
-
   const token = localStorage.getItem("token");
-  if (!token) {
-    console.error("No token found");
-    return null;
-  }
 
   const [formData, setFormData] = useState({
     name: "",
@@ -38,6 +29,16 @@ const AddUpcomingRace = () => {
       navigate("/profile");
     }
   }, [navigate, success]);
+
+  if (!user) {
+    console.error("User not found");
+    return null;
+  }
+
+  if (!token) {
+    console.error("No token found");
+    return null;
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;

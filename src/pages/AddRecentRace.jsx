@@ -9,17 +9,8 @@ const AddRecentRace = () => {
   const navigate = useNavigate();
   const API_URL = "https://web-back-4n3m.onrender.com";
   const DISTANCE_OPTIONS = [5, 10, 15, 16, 21.0975, 42.195];
-  // Check if user exists
-  if (!user) {
-    console.error("User not found");
-    return null;
-  }
-
   const token = localStorage.getItem("token");
-  if (!token) {
-    console.error("No token found");
-    return null;
-  }
+  // Check if user exists
 
   const [formData, setFormData] = useState({
     name: "",
@@ -39,6 +30,16 @@ const AddRecentRace = () => {
       navigate("/profile");
     }
   }, [navigate, success]);
+
+  if (!user) {
+    console.error("User not found");
+    return null;
+  }
+
+  if (!token) {
+    console.error("No token found");
+    return null;
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
