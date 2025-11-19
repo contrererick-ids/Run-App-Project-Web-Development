@@ -51,5 +51,14 @@ src
 
 ## Mockups
 
-Login:
+### Login:
 ![login](https://github.com/contrererick-ids/Run-App-Project-Web-Development/blob/main/ASSETS/LOGIN.png)
+
+### Profile:
+![profile](https://github.com/contrererick-ids/Run-App-Project-Web-Development/blob/main/ASSETS/PROFILE.png)
+
+### Calendar:
+![calendar](https://github.com/contrererick-ids/Run-App-Project-Web-Development/blob/main/ASSETS/CALENDAR.png)
+
+### Add Activity:
+![activity](https://github.com/contrererick-ids/Run-App-Project-Web-Development/blob/main/ASSETS/ACTIVITY.png)
