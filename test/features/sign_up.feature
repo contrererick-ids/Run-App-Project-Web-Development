@@ -8,21 +8,21 @@ Feature: Sign up page functionality
 
   Scenario: Successful sign up redirects to dashboard or setup
     When I enter a valid user "Franco33"
-    And I enter a valid email "test@example.com"
-    And I enter a valid password "123456"
+    And I type a valid email "test@example.com"
+    And I type a valid password "123456"
     And I enter a valid confirmation password "123456"
     And I accept the terms and conditions
     And I click the Sign Up button
-    Then I should be redirected to a valid page
+    Then I should be redirected to next page
 
   Scenario: Sign up fails due to invalid credentials
     When I enter an invalid name "shbvhs,bvcwbbckwabhcbwkebvwyebhvbwlevbwhkebvkjw,evb"
-    And I enter an invalid email "wrong@example.com"
-    And I enter an invalid password "wrongpass"
+    And I type an invalid email "wrong@example.com"
+    And I type an invalid password "wrongpass"
     And I enter an invalid confirmation password "wrongpass"
     And I accept the terms and conditions
     And I click the Sign Up button
-    Then I should see an error message
+    Then I should see an error for invalid credentials message
 
   Scenario: Terms checkbox validation
     When I enter a valid user "Franco33"
@@ -30,4 +30,4 @@ Feature: Sign up page functionality
     And I enter a valid password "123456"
     And I enter a valid confirmation password "123456"
     And I click the Sign Up button
-    Then I should see an error message
+    Then I should see an unchecked box message

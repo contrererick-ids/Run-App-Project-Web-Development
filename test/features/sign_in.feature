@@ -7,8 +7,8 @@ Feature: Sign in page functionality
     Given I open the Sign In page
 
   Scenario: Successful login redirects to dashboard or setup
-    When I enter a valid email "test@example.com"
-    And I enter a valid password "123456"
+    When I enter a valid email "erick.alejandro16@outlook.com"
+    And I enter a valid password "Password1234"
     And I click the Sign In button
     Then I should be redirected to a valid page
 
@@ -19,8 +19,8 @@ Feature: Sign in page functionality
     Then I should see an error message
 
   Scenario: Remember me checkbox works
-    When I enter a valid email "test@example.com"
-    And I enter a valid password "123456"
+    When I enter a valid email "erick.alejandro16@outlook.com"
+    And I enter a valid password "Password1234"
     And I check the Remember Me box
     And I click the Sign In button
     Then I should be redirected to a valid page

@@ -7,8 +7,8 @@ Feature: User Login
     Given I am on the Login page
 
   Scenario: Successful login with valid credentials
-    When I type the email "test@example.com"
-    And I type the password "123456"
+    When I type the email "erick.alejandro16@outlook.com"
+    And I type the password "Password1234"
     And I press the Login button
     Then I should be redirected to the dashboard or user setup
 
@@ -19,8 +19,8 @@ Feature: User Login
     Then an error message should be displayed
 
   Scenario: Remember me checkbox functions correctly
-    When I type the email "test@example.com"
-    And I type the password "123456"
+    When I type the email "erick.alejandro16@outlook.com"
+    And I type the password "Password1234"
     And I enable the Remember Me option
     And I press the Login button
     Then I should be redirected to the dashboard or user setup

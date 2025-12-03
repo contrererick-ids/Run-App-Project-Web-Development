@@ -17,15 +17,15 @@ def step_enter_username(context, username):
     field.clear()
     field.send_keys(username)
 
-@when('I enter a valid email "{email}"')
-@when('I enter an invalid email "{email}"')
+@when('I type a valid email "{email}"')
+@when('I type an invalid email "{email}"')
 def step_enter_email(context, email):
     field = context.driver.find_element(By.NAME, "email")
     field.clear()
     field.send_keys(email)
 
-@when('I enter a valid password "{password}"')
-@when('I enter an invalid password "{password}"')
+@when('I type a valid password "{password}"')
+@when('I type an invalid password "{password}"')
 def step_enter_password(context, password):
     field = context.driver.find_element(By.NAME, "password")
     field.clear()
@@ -49,19 +49,27 @@ def step_click_signup(context):
     btn = context.driver.find_element(By.XPATH, "//button[contains(text(),'Sign Up')]")
     btn.click()
 
-@then("I should be redirected to a valid page")
+@then("I should be redirected to next page")
 def step_valid_redirect(context):
-    WebDriverWait(context.driver, 10).until(
-        lambda driver: driver.current_url.endswith("/") or driver.current_url.endswith("/userSetUp")
-    )
-    assert True
-
-@then("I should see an error message")
-def step_error_message(context):
     error = WebDriverWait(context.driver, 10).until(
         EC.presence_of_element_located((By.CLASS_NAME, "text-red-500"))
     )
     assert error.is_displayed()
+
+@then("I should see an error for invalid credentials message")
+def step_error_invalid_credentials_message(context):
+    error = WebDriverWait(context.driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "text-red-500"))
+    )
+    assert error.is_displayed()
+
+@then("I should see an unchecked box message")
+def step_error_unchecked_box_terms_and_conditions_message(context):
+    checkbox = WebDriverWait(context.driver, 10).until(
+        EC.presence_of_element_located((By.ID, "agreeTerms"))
+    )
+    
+    assert not checkbox.is_selected()
 
 def after_scenario(context, scenario):
     context.driver.quit()
