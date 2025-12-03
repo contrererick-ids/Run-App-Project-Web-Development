@@ -1,0 +1,66 @@
+Listado de rutas de carpetas para el volumen Windows
+El número de serie del volumen es 7EFE-43C1
+C:\USERS\JORGE_1DR5M1R\PROGRAMACION\PRUEBAS DE SOFTWARE\RUN-APP-PROJECT-WEB-DEVELOPMENT-MAIN
+¦   .env
+¦   .gitignore
+¦   eslint.config.js
+¦   estructura.txt
+¦   index.html
+¦   package-lock.json
+¦   package.json
+¦   README.md
+¦   vite.config.js
+¦   
++---.github
+¦   +---workflows
+¦           conventional-commits.yml
+¦           js-lint.yml
+¦           
++---ASSETS
+¦       ACTIVITY.png
+¦       CALENDAR.png
+¦       LOGIN.png
+¦       PROFILE.png
+¦       
++---OpenAi
+¦       server.js
+¦       
++---src
+    ¦   App.jsx
+    ¦   firebase.js
+    ¦   index.css
+    ¦   main.jsx
+    ¦   
+    +---assets
+    ¦       pexels-pixabay-34514.jpg
+    ¦       react.svg
+    ¦       
+    +---components
+    ¦       ChatModal.jsx
+    ¦       EditProfilePic.jsx
+    ¦       Footer.jsx
+    ¦       Header.jsx
+    ¦       NotificationPanel.jsx
+    ¦       ProfileAction.jsx
+    ¦       ProtectedRoute.jsx
+    ¦       TrainingCalendar.jsx
+    ¦       VDotModal.jsx
+    ¦       
+    +---pages
+    ¦       AddActivity.jsx
+    ¦       AddRecentRace.jsx
+    ¦       AddUpcomingRace.jsx
+    ¦       Home.jsx
+    ¦       Landing.jsx
+    ¦       Login.jsx
+    ¦       Profile.jsx
+    ¦       SignUp.jsx
+    ¦       UserSetup.jsx
+    ¦       
+    +---store
+    ¦       authStore.js
+    ¦       
+    +---utils
+            axiosConfig.js
+            fireStore.js
+            
