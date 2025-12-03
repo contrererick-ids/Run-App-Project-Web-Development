@@ -10,7 +10,7 @@ import time
 def step_open_signin(context):
     context.driver = webdriver.Chrome()
     context.driver.maximize_window()
-    context.driver.get("http://localhost:5173/signin")  # Ajusta si tu URL cambia
+    context.driver.get("http://localhost:5173/signin")
 
 @when('I enter a valid email "{email}"')
 def step_enter_valid_email(context, email):

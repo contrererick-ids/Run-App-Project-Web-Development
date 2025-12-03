@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 def step_open_login(context):
     context.driver = webdriver.Chrome()
     context.driver.maximize_window()
-    context.driver.get("http://localhost:5173/signin")  # AJUSTA si tu ruta es distinta
+    context.driver.get("http://localhost:5173/signin")
 
 @when('I type the email "{email}"')
 def step_type_email(context, email):
